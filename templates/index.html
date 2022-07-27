@@ -1,11 +1,22 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Alô, Mundo!</title>
-    </head>
-    <body>
-        <h1>Alô, Mundo!</h1>
-        <h2>Meu primeiro app em pyton com flask!</h2>
-        <h3>Este é um exemplo de string com várias linhas!</h3>
-    </body>
-</html>        
+{% extends "base.html" %}
+
+{%block title %} Página Inicial {% endblock %}
+
+{% block content %}
+{% for post in posts %}
+    <article class="post">
+        <header>
+            <div>
+                <h1>{{ post.title }}</h1>
+                <div class="about">
+                    by {{ post.author }} on {{ post.created.strftime('%d/%m/%Y') }}
+                </div>
+            </div>
+        </header>
+        <p class="body"> {{post.body}} </p>
+    </article>
+    {% if not loop.last %}
+        <hr>
+    {% endif %}    
+{% endfor %}
+{% endblock%}
